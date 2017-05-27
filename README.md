@@ -27,6 +27,7 @@ Both mock.calls are present
 
 
     ### Implementation
+
     `
     export function onLogging (payload) {
       return function (dispatch) {
@@ -41,7 +42,17 @@ Both mock.calls are present
     }
     `
 
+    ## Output - both mock.calls are present
+
+    `
+      console.log src/login.test.js:22
+        dispatch: [ [ { type: 'LOGIN_LOADING' } ],
+          [ { type: 'LOGIN_LOADED', payload: {} } ] ]
+    `
+
+
     ### Test
+
     `
     service.onLogging = jest.fn(() => Promise.reject('some error'));
 
@@ -53,6 +64,17 @@ Both mock.calls are present
 
     expect(dispatch.mock.calls[ 0 ][ 0 ]).toEqual(LoginLoading());
     expect(dispatch.mock.calls[ 1 ][ 0 ]).toEqual(LoginError());
+
+    `
+
+    ### Output - only one mock.calls is present
+
+    `
+     console.log src/login.test.js:41
+        dispatch: [ [ { type: 'LOGIN_LOADING' } ] ]
+
+      console.log src/login.js:46
+        Promise RECT!!!!! some error
 
     `
 Here only one mock.call is present the other one missing, however the console.log show that it executed the catch method.
