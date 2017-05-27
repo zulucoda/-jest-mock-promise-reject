@@ -26,7 +26,7 @@ Both mock.calls are present
 ## Example: When mocking Promise.reject mock.calls is incorrect
 
 
-    ###Implementation
+    ### Implementation
     `
     export function onLogging (payload) {
       return function (dispatch) {
@@ -41,7 +41,7 @@ Both mock.calls are present
     }
     `
 
-    ###Test
+    ### Test
     `
     service.onLogging = jest.fn(() => Promise.reject('some error'));
 
